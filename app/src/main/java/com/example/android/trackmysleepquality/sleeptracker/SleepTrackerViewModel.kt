@@ -19,6 +19,7 @@ package com.example.android.trackmysleepquality.sleeptracker
 import android.app.Application
 import android.provider.SyncStateContract.Helpers.insert
 import android.provider.SyncStateContract.Helpers.update
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -67,6 +68,7 @@ class SleepTrackerViewModel(
                         insert(newNight)
                         tonight.value = getTonightFromDatabase()
                 }
+                Toast.makeText(getApplication(), "Timer started", Toast.LENGTH_SHORT).show()
         }
 
         private suspend fun insert(night: SleepNight) {
@@ -79,6 +81,7 @@ class SleepTrackerViewModel(
                         oldNight.endTimeMilli = System.currentTimeMillis()
                         update(oldNight)
                 }
+                Toast.makeText(getApplication(), "Timer stopped", Toast.LENGTH_SHORT).show()
         }
 
         private suspend fun update(night: SleepNight) {
@@ -89,7 +92,9 @@ class SleepTrackerViewModel(
                 viewModelScope.launch {
                         clear()
                         tonight.value = null
+
                 }
+                Toast.makeText(getApplication(), "Database cleared", Toast.LENGTH_SHORT).show()
         }
 
         private suspend fun clear() {

@@ -40,7 +40,7 @@ abstract class SleepDatabase : RoomDatabase() {
                         SleepDatabase::class.java,
                         "sleep_history_database"
                     ).fallbackToDestructiveMigration()
-                        .allowMainThreadQueries()
+//                        .allowMainThreadQueries()
                         .build()
                     INSTANCE = instance
                 }
